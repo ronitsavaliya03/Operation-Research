@@ -1,5 +1,4 @@
 public class HungarianBacktracking {
-
     static int n = 4;
     static int[][] cost = {
         {22, 23, 24, 25},
@@ -8,13 +7,20 @@ public class HungarianBacktracking {
         {23, 25, 28, 24}
     };
 
-    static boolean[] used = new boolean[n]; 
-    static int[] assignment = new int[n];   
-    static int[] bestAssignment = new int[n];
+    static int[] assignment = new int[n];     
+    static int[] bestAssignment = new int[n]; 
     static int minCost = Integer.MAX_VALUE;
 
+    static boolean isSafe(int row, int col) {
+        
+        for (int i = 0; i < row; i++) {
+            if (assignment[i] == col) return false;
+        }
+        return true;
+    }
+
     static void assignTasks(int row, int currentCost) {
-        if (row == n) {
+        if (row == n) { 
             if (currentCost < minCost) {
                 minCost = currentCost;
                 System.arraycopy(assignment, 0, bestAssignment, 0, n);
@@ -23,11 +29,9 @@ public class HungarianBacktracking {
         }
 
         for (int col = 0; col < n; col++) {
-            if (!used[col]) {
-                used[col] = true;
+            if (isSafe(row, col)) { 
                 assignment[row] = col;
                 assignTasks(row + 1, currentCost + cost[row][col]);
-                used[col] = false; 
             }
         }
     }
@@ -36,11 +40,11 @@ public class HungarianBacktracking {
         assignTasks(0, 0);
 
         System.out.println("Minimum Assignment Cost: " + minCost);
-
         System.out.print("Task assigned: ");
         for (int task : bestAssignment) {
-            System.out.print((task + 1) + " "); 
+            System.out.print((task + 1) + " ");
         }
         System.out.println();
     }
+}
 }
