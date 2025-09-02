@@ -58,6 +58,7 @@ This repository contains **clean, well-commented Java code** for each algorithm.
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
+
 ---
 
 ## 📜 License
